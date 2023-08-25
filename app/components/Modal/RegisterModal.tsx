@@ -13,7 +13,7 @@ import Logo from '../Navbar/Logo';
 export default function RegisterModal() {
   const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
+  const { register, reset, handleSubmit, formState: { errors } } = useForm<FieldValues>({
     defaultValues: {
       name: '',
       email: '',
@@ -25,6 +25,7 @@ export default function RegisterModal() {
     axios.post('/api/register', data)
       .then(() => {
         registerModal.onClose();
+        reset();
       })
       .catch((err) => {
         toast.error(err?.message)
