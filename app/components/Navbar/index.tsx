@@ -1,10 +1,15 @@
 'use client';
+import { User } from "@prisma/client";
 import { Container } from "..";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
 
-export default function Navbar() {
+export interface UserState {
+  currentUser?: User | null;
+}
+
+export default function Navbar({ currentUser }: UserState) {
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b-[1px]">
@@ -12,7 +17,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between gap-3 md:gap-2">
             <Logo />
             <Search />
-            <UserMenu />
+            <UserMenu currentUser={currentUser} />
           </div>
         </Container>
       </div>

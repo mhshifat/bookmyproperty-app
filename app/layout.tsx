@@ -4,6 +4,8 @@ import { Nunito } from 'next/font/google'
 import { ClientOnly, Navbar } from './components'
 import RegisterModal from './components/Modal/RegisterModal'
 import { ToastProvider } from './providers'
+import LoginModal from './components/Modal/LoginModal'
+import getCurrentUser from './actions/getCurrentUser'
 
 const nunito = Nunito({ subsets: ['latin'] })
 
@@ -12,18 +14,21 @@ export const metadata: Metadata = {
   description: 'A simple app to list and rent your property with a booking system',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const currentUser = await getCurrentUser();
+
   return (
     <html lang="en">
       <body className={nunito.className}>
         <ClientOnly>
           <ToastProvider />
           <RegisterModal />
-          <Navbar />
+          <LoginModal />
+          <Navbar currentUser={currentUser} />
         </ClientOnly>
         {children}
       </body>
