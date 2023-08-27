@@ -9,6 +9,7 @@ import { useRegisterModal } from '@/app/hooks';
 import Modal from '.';
 import { Button, Heading, Input } from '..';
 import Logo from '../Navbar/Logo';
+import { signIn } from 'next-auth/react';
 
 export default function RegisterModal() {
   const registerModal = useRegisterModal();
@@ -80,8 +81,8 @@ export default function RegisterModal() {
       footer={(
         <div className='flex flex-col gap-4 mt-3'>
           <hr />
-          <Button outline icon={FcGoogle} onClick={() => {}}>Continue with Google</Button>
-          <Button outline icon={AiFillGithub} onClick={() => {}}>Continue with Github</Button>
+          <Button outline icon={FcGoogle} onClick={() => signIn('google')}>Continue with Google</Button>
+          <Button outline icon={AiFillGithub} onClick={() => signIn('github')}>Continue with Github</Button>
           <div className='text-neutral-500 text-center mt-4 font-light'>
             <div className='flex items-center gap-2 justify-center'>
               <div>
