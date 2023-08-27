@@ -3,7 +3,7 @@ import { AiOutlineMenu } from 'react-icons/ai';
 import { Avatar } from '..';
 import { useCallback, useState } from 'react';
 import MenuItem from './MenuItem';
-import { useLoginModal, useRegisterModal } from '@/app/hooks';
+import { useLoginModal, useRegisterModal, useRentModal } from '@/app/hooks';
 import { UserState } from '.';
 import { signOut } from 'next-auth/react';
 
@@ -11,16 +11,20 @@ export default function UserMenu({ currentUser }: UserState) {
   const [isOpen, setIsOpen] = useState(false);
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
+  const rentModal = useRentModal();
   const toggleOpen = useCallback(() => {
     setIsOpen(value => !value);
   }, [])
-
+  const onRent = useCallback(() => {
+    if (!currentUser) return loginModal.onOpen();
+    rentModal.onOpen();
+  }, [currentUser, loginModal, rentModal]);
 	return (
 		<div className="relative">
 			<div className="flex items-center gap-3">
 				<div
 					className="hidden md:block  text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
-					onClick={() => {}}
+					onClick={onRent}
 				>
 					Rent your home
 				</div>
@@ -58,12 +62,12 @@ export default function UserMenu({ currentUser }: UserState) {
                 />
                 <MenuItem
                   label='Rent my home'
-                  onClick={() => {}}
+                  onClick={onRent}
                 />
                 <hr />
                 <MenuItem
                   label='Logout'
-                  onClick={() => signOut()}
+                  onClick={signOut}
                 />
               </>
             ) : (

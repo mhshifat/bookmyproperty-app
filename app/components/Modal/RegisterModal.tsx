@@ -5,13 +5,14 @@ import { AiFillGithub } from 'react-icons/ai';
 import { useState, useCallback } from 'react';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { useRegisterModal } from '@/app/hooks';
+import { useLoginModal, useRegisterModal } from '@/app/hooks';
 import Modal from '.';
 import { Button, Heading, Input } from '..';
 import Logo from '../Navbar/Logo';
 import { signIn } from 'next-auth/react';
 
 export default function RegisterModal() {
+  const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
   const { register, reset, handleSubmit, formState: { errors } } = useForm<FieldValues>({
@@ -21,6 +22,10 @@ export default function RegisterModal() {
       password: '',
     }
   });
+  const toggle = useCallback(() => {
+    loginModal.onOpen();
+    registerModal.onClose();
+  }, [loginModal, registerModal]);
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
     axios.post('/api/register', data)
@@ -88,7 +93,7 @@ export default function RegisterModal() {
               <div>
                 Already have an account?
               </div>
-              <div onClick={registerModal.onClose} className='text-neutral-800 cursor-pointer hover:underline'>
+              <div onClick={toggle} className='text-neutral-800 cursor-pointer hover:underline'>
                 Log in
               </div>
             </div>

@@ -7,3 +7,8 @@ export { default as Button } from './Button';
 export { default as Heading } from './Heading';
 export { default as Input } from './Input';
 export { default as CategoryBox } from './CategoryBox';
+export { default as CategoryInput } from './CategoryInput';
+export { default as CountrySelect } from './CountrySelect';
+export { default as Map } from './Map';
+export { default as Counter } from './Counter';
+export { default as ImageUpload } from './ImageUpload';

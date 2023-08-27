@@ -1,3 +1,4 @@
+'use client';
 import { CategoryBox, Container } from "..";
 import { TbBeach, TbMountain, TbPool } from 'react-icons/tb';
 import { GiBarn, GiBoatFishing, GiCactus, GiCastle, GiCaveEntrance, GiForestCamp, GiIsland, GiWindmill } from 'react-icons/gi';
