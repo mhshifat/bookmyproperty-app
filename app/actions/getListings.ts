@@ -8,7 +8,10 @@ export default async function getListings() {
       }
     });
 
-    return listings;
+    return listings.map(listing => ({
+      ...listing,
+      createdAt: listing.createdAt.toISOString(),
+    }));
   } catch (err: any) {
     throw new Error(err);
   }
