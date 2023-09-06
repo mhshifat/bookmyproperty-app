@@ -30,8 +30,9 @@ export default function RegisterModal() {
     setIsLoading(true);
     axios.post('/api/register', data)
       .then(() => {
+        toast.success("Success!");
         registerModal.onClose();
-        reset();
+        loginModal.onOpen();
       })
       .catch((err) => {
         toast.error(err?.message)

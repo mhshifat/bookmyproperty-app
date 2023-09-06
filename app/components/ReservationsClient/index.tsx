@@ -6,12 +6,12 @@ import { useCallback, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-interface TripsClientProps {
+interface ReservationsClientProps {
   reservations: SafeReservation[];
   currentUser?: SafeUser | null;
 }
 
-export default function TripsClient({ reservations, currentUser }: TripsClientProps) {
+export default function ReservationsClient({ reservations, currentUser }: ReservationsClientProps) {
   const router = useRouter();
   const [deletingId, setDeletingId] = useState('');
   const onCancel = useCallback((id: string) => {
@@ -22,7 +22,7 @@ export default function TripsClient({ reservations, currentUser }: TripsClientPr
         router.refresh();
       })
       .catch((err) => {
-        toast.error(err?.response?.data?.error);
+        toast.error("Something went wrong!");
       })
       .finally(() => {
         setDeletingId('');
@@ -32,8 +32,8 @@ export default function TripsClient({ reservations, currentUser }: TripsClientPr
   return (
     <Container>
       <Heading
-        title='Trips'
-        subtitle="Where you've been and where you're going"
+        title='Reservations'
+        subtitle="Booking on your properties"
       />
       <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-8">
         {reservations.map(reservation => (
@@ -44,7 +44,7 @@ export default function TripsClient({ reservations, currentUser }: TripsClientPr
             actionId={reservation.id}
             onAction={onCancel}
             disabled={deletingId === reservation.id}
-            actionLabel="Cancel reservation"
+            actionLabel="Cancel guest reservation"
             currentUser={currentUser}
           />
         ))}
