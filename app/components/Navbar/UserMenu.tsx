@@ -6,11 +6,13 @@ import MenuItem from './MenuItem';
 import { useLoginModal, useRegisterModal, useRentModal } from '@/app/hooks';
 import { UserState } from '.';
 import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function UserMenu({ currentUser }: UserState) {
   const [isOpen, setIsOpen] = useState(false);
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
+  const router = useRouter();
   const rentModal = useRentModal();
   const toggleOpen = useCallback(() => {
     setIsOpen(value => !value);
@@ -46,7 +48,7 @@ export default function UserMenu({ currentUser }: UserState) {
               <>
                 <MenuItem
                   label='My trips'
-                  onClick={() => {}}
+                  onClick={() => router.push("/trips")}
                 />
                 <MenuItem
                   label='My favorites'
