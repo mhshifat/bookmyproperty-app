@@ -58,7 +58,7 @@ export default function ListingInfo({ bathroomCount, category, description, gues
       <hr />
       <div className="text-lg font-light text-neutral-500">{description}</div>
       <hr />
-      <Map center={coordinates} />
+      <Map center={coordinates as [number, number]} />
     </div>
   )
 }

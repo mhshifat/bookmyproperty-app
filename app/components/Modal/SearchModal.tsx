@@ -31,6 +31,7 @@ export default function SearchModal() {
     endDate: new Date(),
     key: 'selection'
   });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const Map = useMemo(() => dynamic(() => import("../Map"), { ssr: false }), [location])
   const onBack = useCallback(() => {
     setStep(step => step - 1);
@@ -99,7 +100,7 @@ export default function SearchModal() {
                 onChange={(value) => setLocation(value)}
               />
               <hr />
-              <Map center={location?.latlng} />
+              <Map center={location?.latlng as [number, number]} />
             </div>
           )}
           {step === STEPS.DATE && (
