@@ -6,7 +6,7 @@ interface HomeProps {
   searchParams: IListingsParams;
 }
 
-export const dynamic = 'force-static';
+export const dynamic = 'force-dynamic';
 
 export default async function HomePage({ searchParams }: HomeProps) {
   const listings = await getListings(searchParams);
